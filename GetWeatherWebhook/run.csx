@@ -19,8 +19,10 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
             error = "Please pass 'city' property in the json req. body object"
         });
     }
-    
-    string URL = $"http://api.openweathermap.org/data/2.5/weather?q={data.city},uk&appid=c444b38cb798426821ad20f4391f2eb2";
+    //c444b38cb798426821ad20f4391f2eb2  OPENWEATHER_KEY
+    log.Info("key is: ==> " + GetEnvironmentVariable("OPENWEATHER_KEY"));
+
+    string URL = $"http://api.openweathermap.org/data/2.5/weather?q={data.city}&appid=c444b38cb798426821ad20f4391f2eb2";
     HttpClient client = new HttpClient();
     client.BaseAddress = new Uri(URL);
     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -28,7 +30,6 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
     HttpResponseMessage response = client.GetAsync(URL).Result;
 
     var responseData = response.Content.ReadAsStringAsync().GetAwaiter().GetResult().ToString();
-    log.Info($"{DateTime.Now} ===> {responseData}");
 
     OpenWeather weatherResponse = JsonConvert.DeserializeObject<OpenWeather>(responseData);
 
@@ -62,4 +63,10 @@ public class Weather
     public string main { get; set; }
     public string description { get; set; }
     public string icon { get; set; }
+}
+
+public static string GetEnvironmentVariable(string name)
+{
+    return name + ": " + 
+        System.Environment.GetEnvironmentVariable(name, EnvironmentVariableTarget.Process);
 }
