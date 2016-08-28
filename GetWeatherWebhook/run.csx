@@ -19,13 +19,12 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
             error = "Please pass 'city' property in the json req. body object"
         });
     }
-    //c444b38cb798426821ad20f4391f2eb2  OPENWEATHER_KEY
-    log.Info("key is: ==> " + GetEnvironmentVariable("OPENWEATHER_KEY"));
     
-    string openWeatherMapKey = GetEnvironmentVariable("OPENWEATHER_KEY");
+    string OPENWEATHER_KEY = GetEnvironmentVariable("OPENWEATHER_KEY");
+    string OPENWEATHER_BASEURL = GetEnvironmentVariable("OPENWEATHER_BASEURL");
 
-    
-    string URL = $"http://api.openweathermap.org/data/2.5/weather?q={data.city}&appid={openWeatherMapKey}";
+//http://api.openweathermap.org/data/2.5/weather
+    string URL = $"{OPENWEATHER_BASEURL}?q={data.city}&appid={OPENWEATHER_KEY}";
     HttpClient client = new HttpClient();
     client.BaseAddress = new Uri(URL);
     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
