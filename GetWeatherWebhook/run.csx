@@ -21,6 +21,7 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
     }
     //c444b38cb798426821ad20f4391f2eb2  OPENWEATHER_KEY
     log.Info("key is: ==> " + GetEnvironmentVariable("OPENWEATHER_KEY"));
+    log.Info(GetEnvironmentVariable("AzureWebJobsStorage"));
 
     string URL = $"http://api.openweathermap.org/data/2.5/weather?q={data.city}&appid=c444b38cb798426821ad20f4391f2eb2";
     HttpClient client = new HttpClient();
