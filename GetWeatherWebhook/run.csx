@@ -21,9 +21,11 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
     }
     //c444b38cb798426821ad20f4391f2eb2  OPENWEATHER_KEY
     log.Info("key is: ==> " + GetEnvironmentVariable("OPENWEATHER_KEY"));
-    log.Info(GetEnvironmentVariable("OPENWEATHER_KEY"));
+    
+    string openWeatherMapKey = GetEnvironmentVariable("OPENWEATHER_KEY");
 
-    string URL = $"http://api.openweathermap.org/data/2.5/weather?q={data.city}&appid=c444b38cb798426821ad20f4391f2eb2";
+    
+    string URL = $"http://api.openweathermap.org/data/2.5/weather?q={data.city}&appid={openWeatherMapKey}";
     HttpClient client = new HttpClient();
     client.BaseAddress = new Uri(URL);
     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
