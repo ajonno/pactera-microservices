@@ -11,6 +11,8 @@ using Newtonsoft.Json;
 
 public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
 {
+    log.Info("Invoking GetWeatherWebhook...");
+
     string jsonContent = await req.Content.ReadAsStringAsync();
     dynamic data = JsonConvert.DeserializeObject(jsonContent);
 
@@ -23,9 +25,7 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
     string OPENWEATHER_KEY = GetEnvironmentVariable("OPENWEATHER_KEY");
     string OPENWEATHER_BASEURL = GetEnvironmentVariable("OPENWEATHER_BASEURL");
 
-//http://api.openweathermap.org/data/2.5/weather
     string URL = $"{OPENWEATHER_BASEURL}?q={data.city}&appid={OPENWEATHER_KEY}";
-    log.Info($"url = {URL}");
 
     HttpClient client = new HttpClient();
     client.BaseAddress = new Uri(URL);
