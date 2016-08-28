@@ -25,6 +25,8 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
 
 //http://api.openweathermap.org/data/2.5/weather
     string URL = $"{OPENWEATHER_BASEURL}?q={data.city}&appid={OPENWEATHER_KEY}";
+    log.Info($"url = {URL}");
+
     HttpClient client = new HttpClient();
     client.BaseAddress = new Uri(URL);
     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
