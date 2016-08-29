@@ -38,21 +38,11 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
     var responseData = response.Content.ReadAsStringAsync().GetAwaiter().GetResult().ToString();
     OpenWeather weatherResponse = JsonConvert.DeserializeObject<OpenWeather>(responseData);
 
-    log.Info(weatherResponse.name); //<-- melb
-    //{DateTime.Now}  Thursday 11:00 AM
-    //Weather   Mostly Cloudy   weather[0].main
-    log.Info(weatherResponse.weather[0].main); //<-- melb
-    
-    //Temperature  9°C
-    log.Info(weatherResponse.main.temp); //<
-
-    //Wind 32km/h
-    log.Info(weatherResponse.wind.speed); //
-
     //time
     DateTime time = DateTime.Now;         
     var formattedTime = time.ToString("dddd HH:mm tt");  //eg. Monday 05:30 AM
 
+    //creating an anonymous type to hold the required payload/field data
     var finalPayload = new {
         city           = weatherResponse.name,
         updatedTime    = formattedTime,
@@ -62,10 +52,9 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
     };  
 
     return req.CreateResponse(HttpStatusCode.OK, new {
-        weatherData = finalPayload                     //weatherResponse
+        weatherData = finalPayload                     
     });
 }
-
 
 
 public class OpenWeather
