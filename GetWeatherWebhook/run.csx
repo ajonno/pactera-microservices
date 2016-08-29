@@ -89,7 +89,7 @@ public class WeatherMain
 
 public class WeatherWind
 {
-    public double speed { get; set; }
+    public string speed { get; set; }
     public int deg { get; set; }
 }
 
