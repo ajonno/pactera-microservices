@@ -1,7 +1,9 @@
 #r "Newtonsoft.Json"
 #r "Microsoft.WindowsAzure.Storage"
-using Microsoft.WindowsAzure.Storage.Table;
 
+#load "test.csx"
+
+using Microsoft.WindowsAzure.Storage.Table;
 using System;
 using System.Text;
 using System.Net;
@@ -69,7 +71,7 @@ public class Weather
     public string icon { get; set; }
 }
 
-public static string GetEnvironmentVariable(string name)
-{
-    return System.Environment.GetEnvironmentVariable(name, EnvironmentVariableTarget.Process);
-}
+// public static string GetEnvironmentVariable(string name)
+// {
+//     return System.Environment.GetEnvironmentVariable(name, EnvironmentVariableTarget.Process);
+// }
