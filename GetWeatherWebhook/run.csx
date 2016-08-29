@@ -52,7 +52,7 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
     };  
 
     var payload = new object[] {
-        new {city           = weatherResponse.name},
+        new {name = "city", text = weatherResponse.name},
         new {updatedTime    = formattedTime},
         new {weather        = weatherResponse.weather[0].main},
         new {temp           = weatherResponse.main.temp},
