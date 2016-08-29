@@ -59,7 +59,7 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
         weather:        weatherResponse.weather[0].main,
         temp:           weatherResponse.main.temp,
         wind:           weatherResponse.wind.speed
-    }
+    };
 
     return req.CreateResponse(HttpStatusCode.OK, new {
         weatherData = finalPayload //weatherResponse
