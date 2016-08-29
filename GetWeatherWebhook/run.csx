@@ -44,10 +44,10 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
     log.Info(weatherResponse.weather[0].main); //<-- melb
     
     //Temperature  9°C
-    log.Info(weatherResponse.main.temp.ToString()); //<
+    log.Info(weatherResponse.ToString()); //<
 
     //Wind 32km/h
-    log.Info(weatherResponse.wind.speed.ToString()); //
+  //  log.Info(weatherResponse.wind.speed.ToString()); //
 
 
     return req.CreateResponse(HttpStatusCode.OK, new {
