@@ -62,7 +62,7 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
     // };  
 
     return req.CreateResponse(HttpStatusCode.OK, new {
-        weatherData = formattedTime //weatherResponse
+        weatherData = {'time': formattedTime} //weatherResponse
     });
 }
 
