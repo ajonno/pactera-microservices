@@ -40,12 +40,14 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
 
     log.Info(weatherResponse.name); //<-- melb
     //{DateTime.Now}  Thursday 11:00 AM
-    //Weather   Mostly Cloudy   weather[0].description
-    log.Info(weatherResponse.weather[0].description); //<-- melb
+    //Weather   Mostly Cloudy   weather[0].main
+    log.Info(weatherResponse.weather[0].main); //<-- melb
     
     //Temperature  9°C
-    //Wind 32km/h
+    log.Info(weatherResponse.main.temp); //<-- melb
 
+    //Wind 32km/h
+    log.Info(weatherResponse.wind.speed); //<-- melb
 
 
     return req.CreateResponse(HttpStatusCode.OK, new {
@@ -59,9 +61,9 @@ public class OpenWeather
 {
     public List<Weather> weather { get; set; }
     public string @base {get; set;}
-    public object main {get; set;}
+    public WeatherMain main {get; set;}
     public int visibility {get; set;}
-    public object wind {get; set;}
+    public WeatherWind wind {get; set;}
     public object clouds {get; set;}
     public object sys {get; set;}
     public string name {get; set;}
@@ -74,6 +76,23 @@ public class Weather
     public string description { get; set; }
     public string icon { get; set; }
 }
+
+public class WeatherMain
+{
+    public string temp { get; set; }
+    public string pressure { get; set; }
+    public string humidity { get; set; }
+    public string temp_min { get; set; }
+    public string temp_max { get; set; }
+    
+}
+
+public class WeatherWind
+{
+    public double speed { get; set; }
+    public int deg { get; set; }
+}
+
 
 public class Coord
 {
