@@ -47,7 +47,7 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
     log.Info(weatherResponse.main.temp); //<
 
     //Wind 32km/h
-  //  log.Info(weatherResponse.wind.speed.ToString()); //
+    log.Info(weatherResponse.wind.speed); //
 
 
     return req.CreateResponse(HttpStatusCode.OK, new {
