@@ -49,9 +49,20 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
     //Wind 32km/h
     log.Info(weatherResponse.wind.speed); //
 
+    //time
+    DateTime time = DateTime.Now;         
+    formattedTime = time.ToString("dddd HH:mm tt");  //eg. Monday 05:30 AM
+
+    var finalPayload = new {
+        city:           weatherResponse.name,
+        updatedTime:    formattedTime,
+        weather:        weatherResponse.weather[0].main,
+        temp:           weatherResponse.main.temp,
+        wind:           weatherResponse.wind.speed
+    }
 
     return req.CreateResponse(HttpStatusCode.OK, new {
-        weatherData = weatherResponse
+        weatherData = finalPayload //weatherResponse
     });
 }
 
