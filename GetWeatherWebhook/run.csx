@@ -54,7 +54,7 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
     var formattedTime = time.ToString("dddd HH:mm tt");  //eg. Monday 05:30 AM
 
     var finalPayload = new {
-        city           = weatherResponse.name
+        city           = weatherResponse.name,
         updatedTime    = formattedTime,
         weather        = weatherResponse.weather[0].main,
         temp           = weatherResponse.main.temp,
