@@ -27,7 +27,7 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
     string OPENWEATHER_KEY = GetEnvironmentVariable("OPENWEATHER_KEY");
     string OPENWEATHER_BASEURL = GetEnvironmentVariable("OPENWEATHER_BASEURL");
 
-    string URL = $"{OPENWEATHER_BASEURL}?q={data.city}&appid={OPENWEATHER_KEY}";
+    string URL = $"{OPENWEATHER_BASEURL}?q={data.city}&units=metric&appid={OPENWEATHER_KEY}";
 
     HttpClient client = new HttpClient();
     client.BaseAddress = new Uri(URL);
@@ -38,7 +38,11 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
     var responseData = response.Content.ReadAsStringAsync().GetAwaiter().GetResult().ToString();
     OpenWeather weatherResponse = JsonConvert.DeserializeObject<OpenWeather>(responseData);
 
-    log.Info(weatherResponse.name);
+    log.Info(weatherResponse.name); //<-- melb
+    //{DateTime.Now}  Thursday 11:00 AM
+    //Weather   Mostly Cloudy   weather[0].description
+    //Temperature  9°C
+    //Wind 32km/h
 
 
 
