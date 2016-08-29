@@ -51,7 +51,7 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
         wind           = weatherResponse.wind.speed
     };  
 
-    var payload = new[] {
+    var payload = new object[] {
         new {city           = weatherResponse.name},
         new {updatedTime    = formattedTime},
         new {weather        = weatherResponse.weather[0].main},
