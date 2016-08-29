@@ -43,14 +43,6 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
     var formattedTime = time.ToString("dddd HH:mm tt");  //eg. Monday 05:30 AM
 
     //creating an anonymous type to hold the required payload/field data
-    var finalPayload = new {
-        city           = weatherResponse.name,
-        updatedTime    = formattedTime,
-        weather        = weatherResponse.weather[0].main,
-        temp           = weatherResponse.main.temp,
-        wind           = weatherResponse.wind.speed
-    };  
-
     var payload = new object[] {
         new {field = "city", val = weatherResponse.name},
         new {field = "updatedTime", val = formattedTime},
@@ -58,7 +50,6 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
         new {field = "temperature", val = weatherResponse.main.temp},
         new {field = "wind", val = weatherResponse.wind.speed}
     };  
-
 
     return req.CreateResponse(HttpStatusCode.OK, new {
         payload                     
