@@ -41,6 +41,8 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
     log.Info(weatherResponse.name); //<-- melb
     //{DateTime.Now}  Thursday 11:00 AM
     //Weather   Mostly Cloudy   weather[0].description
+    log.Info(weatherResponse.weather[0].description); //<-- melb
+    
     //Temperature  9°C
     //Wind 32km/h
 
