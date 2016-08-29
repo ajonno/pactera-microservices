@@ -36,8 +36,11 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
     HttpResponseMessage response = client.GetAsync(URL).Result;
 
     var responseData = response.Content.ReadAsStringAsync().GetAwaiter().GetResult().ToString();
-
     OpenWeather weatherResponse = JsonConvert.DeserializeObject<OpenWeather>(responseData);
+
+    log.Info(weatherResponse.name);
+
+
 
     return req.CreateResponse(HttpStatusCode.OK, new {
         weatherData = weatherResponse
@@ -45,11 +48,6 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
 }
 
 
-public class Coord
-{
-    public double lon { get; set; }
-    public double lat { get; set; }
-}
 
 public class OpenWeather
 {
@@ -70,3 +68,10 @@ public class Weather
     public string description { get; set; }
     public string icon { get; set; }
 }
+
+public class Coord
+{
+    public double lon { get; set; }
+    public double lat { get; set; }
+}
+
