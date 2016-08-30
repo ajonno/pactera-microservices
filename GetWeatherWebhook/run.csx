@@ -26,7 +26,6 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
     
     string OPENWEATHER_KEY = GetEnvironmentVariable("OPENWEATHER_KEY");
     string OPENWEATHER_BASEURL = GetEnvironmentVariable("OPENWEATHER_BASEURL");
-    const string KM_PER_HR = "km/h";
 
     string URL = $"{OPENWEATHER_BASEURL}?q={data.city}&units=metric&appid={OPENWEATHER_KEY}";
 
@@ -50,14 +49,14 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
     DateTime cstTime = TimeZoneInfo.ConvertTimeFromUtc(final, cstZone);
     var formattedcstTime = cstTime.ToString("dddd HH:mm tt");
     char degree = (char)0176;
-
+    
     //creating an anonymous type to hold the required payload/field data
     var payload = new object[] {
         new {field = "City", val = weatherResponse.name},
         new {field = "Updated Time", val = formattedcstTime},
         new {field  = "Weather", val = weatherResponse.weather[0].main},
         new {field = "Temperature", val = weatherResponse.main.temp + " " + degree + "C"},
-        new {field = "Wind", val = weatherResponse.wind.speed + " " + KM_PER_HR}
+        new {field = "Wind", val = weatherResponse.wind.speed + " km/h"}
     };  
 
     return req.CreateResponse(HttpStatusCode.OK, new {
