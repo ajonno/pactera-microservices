@@ -27,7 +27,7 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
     string OPENWEATHER_KEY = GetEnvironmentVariable("OPENWEATHER_KEY");
     string OPENWEATHER_BASEURL = GetEnvironmentVariable("OPENWEATHER_BASEURL");
     const string KM_PER_HR = "km/h";
-    const string DEGREES_CELCIUS = (char)0176 + "C";
+    string DEGREES_CELCIUS = (char)0176 + "C";
 
     string URL = $"{OPENWEATHER_BASEURL}?q={data.city}&units=metric&appid={OPENWEATHER_KEY}";
 
