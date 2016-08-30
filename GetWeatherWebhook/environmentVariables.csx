@@ -5,4 +5,4 @@ public static string GetEnvironmentVariable(string name)
 }
 
 public const string KM_PER_HR = "km/h";
-public char string DEGREES_CELCIUS = (char)0176 + "C";
+public char DEGREES_CELCIUS = (char)0176 + "C";
