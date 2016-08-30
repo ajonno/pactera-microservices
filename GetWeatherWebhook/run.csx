@@ -55,8 +55,8 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
         new {field = "City", val = weatherResponse.name},
         new {field = "Updated Time", val = formattedcstTime},
         new {field  = "Weather", val = weatherResponse.weather[0].main},
-        new {field = "Temperature", val = weatherResponse.main.temp + " " + "C"},
-        new {field = "Wind", val = weatherResponse.wind.speed + " km/h"}
+        new {field = "Temperature", val = weatherResponse.main.temp},
+        new {field = "Wind", val = weatherResponse.wind.speed}
     };  
 
     return req.CreateResponse(HttpStatusCode.OK, new {
