@@ -42,15 +42,12 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
     DateTime time = DateTime.Now;         
     var formattedTime = time.ToString("dddd HH:mm tt");  //eg. Monday 05:30 AM
 
+    //convert epoch time from data response payload, to AEST
     var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
     var final = epoch.AddSeconds(weatherResponse.dt);
     TimeZoneInfo cstZone = TimeZoneInfo.FindSystemTimeZoneById("AUS Eastern Standard Time");
     DateTime cstTime = TimeZoneInfo.ConvertTimeFromUtc(final, cstZone);
     var formattedcstTime = cstTime.ToString("dddd HH:mm tt");
-
-    log.Info("weatherResponse.dt = " + weatherResponse.dt);
-    log.Info("final = " + final);
-
 
     //creating an anonymous type to hold the required payload/field data
     var payload = new object[] {
