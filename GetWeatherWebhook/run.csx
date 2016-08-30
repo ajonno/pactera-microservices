@@ -27,7 +27,6 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
     string OPENWEATHER_KEY = GetEnvironmentVariable("OPENWEATHER_KEY");
     string OPENWEATHER_BASEURL = GetEnvironmentVariable("OPENWEATHER_BASEURL");
     const string KM_PER_HR = "km/h";
-    string DEGREES_CELCIUS = (char)0176 + "C";
 
     string URL = $"{OPENWEATHER_BASEURL}?q={data.city}&units=metric&appid={OPENWEATHER_KEY}";
 
@@ -56,7 +55,7 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
         new {field = "City", val = weatherResponse.name},
         new {field = "Updated Time", val = formattedcstTime},
         new {field  = "Weather", val = weatherResponse.weather[0].main},
-        new {field = "Temperature", val = weatherResponse.main.temp + " " + DEGREES_CELCIUS},
+        new {field = "Temperature", val = weatherResponse.main.temp + " " + (char)0176 + "C"},
         new {field = "Wind", val = weatherResponse.wind.speed + " " + KM_PER_HR}
     };  
 
