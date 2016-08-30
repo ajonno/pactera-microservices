@@ -48,15 +48,14 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
     TimeZoneInfo cstZone = TimeZoneInfo.FindSystemTimeZoneById("AUS Eastern Standard Time");
     DateTime cstTime = TimeZoneInfo.ConvertTimeFromUtc(final, cstZone);
     var formattedcstTime = cstTime.ToString("dddd HH:mm tt");
-    char degree = (char)0176;
     
     //creating an anonymous type to hold the required payload/field data
     var payload = new object[] {
         new {field = "City", val = weatherResponse.name},
         new {field = "Updated Time", val = formattedcstTime},
         new {field  = "Weather", val = weatherResponse.weather[0].main},
-        new {field = "Temperature", val = weatherResponse.main.temp + " " + degree + "C"},
-        new {field = "Wind", val = weatherResponse.wind.speed + " km/h"}
+        new {field = "Temperature", val = weatherResponse.main.temp + " " + DEGREES_CELCIUS},
+        new {field = "Wind", val = weatherResponse.wind.speed + " " + KM_PER_HR}
     };  
 
     return req.CreateResponse(HttpStatusCode.OK, new {
