@@ -44,12 +44,12 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
 
     var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
     var final = epoch.AddSeconds(weatherResponse.dt);
-
+    var formattedFinal = final.ToString("dddd HH:mm tt");
 
     //creating an anonymous type to hold the required payload/field data
     var payload = new object[] {
         new {field = "City", val = weatherResponse.name},
-        new {field = "Updated Time", val = final},
+        new {field = "Updated Time", val = formattedFinal},
         new {field  = "Weather", val = weatherResponse.weather[0].main},
         new {field = "Temperature", val = weatherResponse.main.temp},
         new {field = "Wind", val = weatherResponse.wind.speed}
