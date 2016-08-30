@@ -44,10 +44,12 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
 
     var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
     var final = epoch.AddSeconds(weatherResponse.dt);
-    var formattedFinal = final.ToString("dddd HH:mm tt");
     TimeZoneInfo cstZone = TimeZoneInfo.FindSystemTimeZoneById("AUS Eastern Standard Time");
     DateTime cstTime = TimeZoneInfo.ConvertTimeFromUtc(final, cstZone);
     var formattedcstTime = cstTime.ToString("dddd HH:mm tt");
+
+    log.Info("weatherResponse.dt = " + weatherResponse.dt);
+    log.Info("final = " + final);
 
 
     //creating an anonymous type to hold the required payload/field data
