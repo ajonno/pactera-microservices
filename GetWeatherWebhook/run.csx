@@ -45,7 +45,7 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
     //creating an anonymous type to hold the required payload/field data
     var payload = new object[] {
         new {field = "City", val = weatherResponse.name},
-        new {field = "Updated Time", val = formattedTime},
+        new {field = "Updated Time", val = weatherResponse.dt},
         new {field  = "Weather", val = weatherResponse.weather[0].main},
         new {field = "Temperature", val = weatherResponse.main.temp},
         new {field = "Wind", val = weatherResponse.wind.speed}
@@ -66,6 +66,7 @@ public class OpenWeather
     public WeatherWind wind {get; set;}
     public object clouds {get; set;}
     public object sys {get; set;}
+    public object dt {get; set;}
     public string name {get; set;}
 
 }
