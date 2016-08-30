@@ -49,7 +49,7 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
     TimeZoneInfo cstZone = TimeZoneInfo.FindSystemTimeZoneById("AUS Eastern Standard Time");
     DateTime cstTime = TimeZoneInfo.ConvertTimeFromUtc(final, cstZone);
     var formattedcstTime = cstTime.ToString("dddd HH:mm tt");
-    
+     
 
     //creating an anonymous type to hold the required payload/field data
     var payload = new object[] {
