@@ -42,12 +42,14 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
     DateTime time = DateTime.Now;         
     var formattedTime = time.ToString("dddd HH:mm tt");  //eg. Monday 05:30 AM
 
-    var test = FromUnixTime(weatherResponse.dt);
+    var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+    var final = epoch.AddSeconds(weatherResponse.dt);
+
 
     //creating an anonymous type to hold the required payload/field data
     var payload = new object[] {
         new {field = "City", val = weatherResponse.name},
-        new {field = "Updated Time", val = test.ToString()},
+        new {field = "Updated Time", val = final},
         new {field  = "Weather", val = weatherResponse.weather[0].main},
         new {field = "Temperature", val = weatherResponse.main.temp},
         new {field = "Wind", val = weatherResponse.wind.speed}
@@ -58,11 +60,6 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
     });
 }
 
-public DateTime FromUnixTime(long unixTime)
-{
-    var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-    return epoch.AddSeconds(unixTime);
-}
 
 
 public class OpenWeather
